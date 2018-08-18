@@ -7,10 +7,10 @@
 import feedparser
 import pandas as pd
 import tldextract
-from postagem.Util import download_image, extract_domain, downlaod_and_move_image, get_noticia_uol, get_noticia_comercio
+from Util import download_image, extract_domain, downlaod_and_move_image, get_noticia_uol, get_noticia_comercio
 import os
-from postagem.lexical_analyzer import lexical
-from postagem.site_wordpress import post_news
+from lexical_analyzer import lexical
+from site_wordpress import post_news
 from Model.News import News
 from Database.new_database import save_news, select_news
 
