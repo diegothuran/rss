@@ -5,7 +5,6 @@ import tldextract
 import os
 import wget
 from bs4 import BeautifulSoup
-from selenium import webdriver
 import requests
 
 def download_image(url, path_to_save_image):
