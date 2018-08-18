@@ -1,0 +1,2 @@
+
+0 - categorias: {'rede', 'sp', 'patri', 'pdt', 'psl', 'dc', 'ce', 'mdb', 'rj', 'se', 'psdb', 'pode', 'pstu', 'pt', 'novo', 'ppl', 'psol'}
