@@ -6,38 +6,26 @@
 
 import feedparser
 import pandas as pd
-import tldextract
-from Util import download_image, extract_domain, downlaod_and_move_image, get_noticia_uol, get_noticia_comercio
-import os
+from Util import extract_domain, downlaod_and_move_image, get_noticia_comercio
 from lexical_analyzer import lexical
 from site_wordpress import post_news
-from Model.News import News
-from Database.new_database import save_news, select_news
+from News import News
+from new_database import save_news, check_news
 
 # In[2]:
 
 
-# hit_list = ["https://www.jornaldocomercio.com/_conteudo/politica/rss.xml",
-#            "http://pox.globo.com/rss/g1/politica/mensalao/", "https://feeds.folha.uol.com.br/poder/rss091.xml"]
 
 hit_list = ["https://www.jornaldocomercio.com/_conteudo/politica/rss.xml",
            "http://pox.globo.com/rss/g1/politica/", "https://feeds.folha.uol.com.br/poder/rss091.xml"]
-
-# hit_list = ["http://pox.globo.com/rss/g1/politica/", "https://feeds.folha.uol.com.br/poder/rss091.xml"]
 
 
 future_calls = [feedparser.parse(rss_url) for rss_url in hit_list]
 
 
-# In[3]:
-
-
 entries = []
 for feed in future_calls:
     entries.extend( feed[ "items" ] )
-
-
-# In[4]:
 
 
 resultados = pd.DataFrame({'titulos': [], 'links': [], 'noticia': [], 'image': [], 'abstract': [], 'date': []})
@@ -82,21 +70,10 @@ for entrie in entries:
         pass
 
     news = News(row['abstract'], row['noticia'], row['date'], row['links'], row['titulos'], row['image'])
-    if select_news(news) is None:
+    if not check_news(news):
         save_news(news)
         row = pd.DataFrame(row)
         resultados_cat = lexical(row)
         post_news(resultados_cat)
 
-
-# In[6]:
- 
- 
-resultados_cat = lexical(resultados)
- 
- 
-# In[7]:
- 
- 
-post_news(resultados_cat)
 
