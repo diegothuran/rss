@@ -1,4 +1,4 @@
-from postagem import connection, News
+import connection, News
 import datetime
 from dateutil import parser
 
@@ -31,10 +31,10 @@ def check_news(news =News):
     try:
         cursor = cnx.cursor()
 
-        query = "SELECT * FROM noticias WHERE abstract= %s and titulo = %s"
+        query = "SELECT * FROM noticias WHERE titulo = %s"
 
-        titulo = (news.title[0])
-        result = cursor.execute(query, titulo)
+        titulo = (news.title[0],)
+        cursor.execute(query, titulo)
 
         rows = cursor.fetchall()
         cnx.close()
