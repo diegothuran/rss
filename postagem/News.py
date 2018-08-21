@@ -1,4 +1,4 @@
-from postagem.lexical_analyzer import lexical
+from lexical_analyzer import lexical
 
 class News(object):
 
